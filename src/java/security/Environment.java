@@ -235,6 +235,10 @@ public class Environment {
         return true;
     }
     
+    public Protocol getProtocol() {
+        return protocol;
+    }
+    
     
 
 }

@@ -71,4 +71,9 @@ public class Step {
         this.action = step.action;
         this.recipiant = step.recipiant;
     }
+    
+    public String getDescription()
+    {
+        return "Command: " + getAction() + " | Term: " + getTerm().getTermString() + " | To: " + getRecipiant();
+    }
 }
