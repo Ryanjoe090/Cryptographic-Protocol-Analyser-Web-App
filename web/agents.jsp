@@ -285,11 +285,9 @@
                                 <div class="panel-body">
                                     <div class="col-sm-6">
                                         <ul class="list-group">
-                                            <li class="list-group-item">Cras justo odio</li>
-                                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                                            <li class="list-group-item">Morbi leo risus</li>
-                                            <li class="list-group-item">Porta ac consectetur ac</li>
-                                            <li class="list-group-item">Vestibulum at eros</li>
+                                            <%for(int j=0;j<environment.getAgents().get(i).getKnowledge().size();j++){%>
+                                            <li class="list-group-item"><%=environment.getAgents().get(i).getKnowledge().get(j).getTermString()%></li>
+                                            <%}%>
                                         </ul>
                                     </div>
                                     <div class="col-sm-6">

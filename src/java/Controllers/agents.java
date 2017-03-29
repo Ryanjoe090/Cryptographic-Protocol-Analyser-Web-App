@@ -7,6 +7,7 @@ package Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -61,7 +62,9 @@ public class agents extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        //processRequest(request, response);
+        RequestDispatcher rd = request.getRequestDispatcher("./agents.jsp");
+        rd.forward(request, response);
     }
 
     /**
@@ -85,6 +88,8 @@ public class agents extends HttpServlet {
             String roleAgent = request.getParameter("selectRoleChar");
             environment.addAgent(nameParam, roleAgent);
         }
+        RequestDispatcher rd = request.getRequestDispatcher("./agents.jsp");
+        rd.forward(request, response);
     }
 
     /**

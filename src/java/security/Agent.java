@@ -133,6 +133,10 @@ public class Agent {
         return stepCounter;
     }
     
+    public List<Term> getKnowledge() {
+        return knowledge;
+    }
+    
     public void incrementStep()
     {
         stepCounter++;
@@ -200,7 +204,7 @@ public class Agent {
     }
     
     public String getAgentDescription() {
-        return "Name: " + name + " | Run ID: " + runIdentifier + " | Step Counter: " + stepCounter + " | Role: " + role.getAgent();
+        return "Name: " + name + " | Run ID: " + runIdentifier + " | Step Counter: " + stepCounter;
     }
     
 }
