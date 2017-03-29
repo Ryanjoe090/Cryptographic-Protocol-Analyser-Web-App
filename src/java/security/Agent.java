@@ -200,7 +200,7 @@ public class Agent {
     }
     
     public String getAgentDescription() {
-        return "Name: " + name + " | Run ID: " + runIdentifier + " | Step Counter: " + stepCounter;
+        return "Name: " + name + " | Run ID: " + runIdentifier + " | Step Counter: " + stepCounter + " | Role: " + role.getAgent();
     }
     
 }

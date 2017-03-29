@@ -39,8 +39,16 @@ public class Environment {
             roleMap.put(protocol.getRole().get(i).getAgent(),i);
         }
     }
+    
+    public void addAgent(String nameParam, String roleAgent) {
+                System.out.println("Enter an Agent name: ");
+                //String name = reader.next();
+                int id = createAgent(nameParam);
+                System.out.println("My name is: " + agents.get(id).getName() + "\nMy Run Identifier is: " + agents.get(id).getRunIdentifier());
+                setRole(id, roleAgent);
+    }
 
-    public void run() {
+    /*public void run() {
         Scanner reader = new Scanner(System.in);  // Reading from System.in
         while (true) {
             System.out.println("\n\n\n1:CREATE AGENT\n2:TAKE STEP\nChoose Option: ");
@@ -57,7 +65,7 @@ public class Environment {
                 agents.get(id).setKnowledge(protocol.getRole().get(roleMap.get(roleAgent)).getKnowledge());
                 for(Step step : agents.get(id).getRole().getSteps()) {
                     System.out.println(step.getAction().toString() + " " + step.getTerm().getTermString());
-                }*/
+                }
                 setRole(reader, id);
             }
             else if (n==2)
@@ -76,12 +84,12 @@ public class Environment {
                 correctVariable(reader);
             }
         }
-    }
+    }*/
     
-    public void setRole(Scanner reader, int id)
+    public void setRole(int id, String roleChar)
     {
         System.out.println("Give Role:\n" + protocol.getRole().get(0).getAgent() + "\n" + protocol.getRole().get(1).getAgent() + "\n" + protocol.getRole().get(2).getAgent());
-                String roleAgent = reader.next();
+                String roleAgent = roleChar;
                 //Role role = protocol.getRole().get(roleMap.get(roleAgent));
                 Role role = new Role(agents.get(id).getName());
                 role.setAllKnowledge(new LinkedList(protocol.getRole().get(roleMap.get(roleAgent)).getKnowledge()));

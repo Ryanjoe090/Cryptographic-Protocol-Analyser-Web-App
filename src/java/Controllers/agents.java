@@ -8,14 +8,19 @@ package Controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import security.Environment;
 
 /**
  *
  * @author ryanj
  */
+@WebServlet(name = "agents", urlPatterns = {"/agents"})@MultipartConfig
 public class agents extends HttpServlet {
 
     /**
@@ -71,7 +76,15 @@ public class agents extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         //I PROBABLY WANT AN ARGUMENT MAP HERE TO SELECT COMMAND
-        processRequest(request, response);
+        //processRequest(request, response);
+        HttpSession session = request.getSession();
+        if(request.getParameter("postAgent").equals("ADD"))
+        {
+            Environment environment = (Environment)session.getAttribute("environment");
+            String nameParam = request.getParameter("name");
+            String roleAgent = request.getParameter("selectRoleChar");
+            environment.addAgent(nameParam, roleAgent);
+        }
     }
 
     /**
