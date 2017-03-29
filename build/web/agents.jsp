@@ -256,6 +256,11 @@
                                         <li class="list-group-item">Vestibulum at eros</li>
                                     </ul>
                                 </div>
+                                <div class="col-sm-6">
+                                    <button type="button" class="btn btn-success btn-block">Change Knowledge</button>
+                                    <button type="button" class="btn btn-info btn-block">Take Step</button>
+                                    <button type="button" class="btn btn-danger btn-block">Delete Agent</button>
+                                </div>
                             </div>
                         </div>
                     </div>
