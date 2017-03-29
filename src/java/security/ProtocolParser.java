@@ -23,13 +23,13 @@ public class ProtocolParser {
     Parser parser = new Parser();
     Protocol protocol;
 
-    public Protocol parseProtocol(String file) //soon to be file
+    public Protocol parseProtocol(BufferedReader br,List<String> raw) //soon to be file
     {
         try {
-            File dir = new File("src");
-            File fin = new File(dir.getAbsolutePath() + File.separator + "protocols" + File.separator + "NeedhamSchroederPublicKey.txt");
+            //File dir = new File("src");
+            //File fin = new File(dir.getAbsolutePath() + File.separator + "protocols" + File.separator + "NeedhamSchroederPublicKey.txt");
             //File fin = new File("NeedhamSchroederPublicKey.txt");
-            parseProtocolFile(fin);
+            parseProtocolFile(br,raw);
         } catch (IOException e) {
                 System.out.println("Didnt Parse");
         }
@@ -81,17 +81,19 @@ public class ProtocolParser {
         }
     }
 
-    private void parseProtocolFile(File steps) throws IOException {
-        FileInputStream stepStream = new FileInputStream(steps);
+    private void parseProtocolFile(BufferedReader br, List<String> raw) throws IOException {
+        //FileInputStream stepStream = new FileInputStream(steps);
         //List<Role> roles = new LinkedList();
 
         //Construct BufferedReader from InputStreamReader
-        BufferedReader br = new BufferedReader(new InputStreamReader(stepStream));
+        //BufferedReader br = new BufferedReader(new InputStreamReader(stepStream));
 
-        String line = null;
-        protocol = new Protocol(br.readLine());
+        String line = br.readLine();
+        raw.add(line);
+        protocol = new Protocol(line);
         while ((line = br.readLine()) != null) {
             System.out.println(line);
+            raw.add(line);
             if (line.contains("knows")) {
                 protocol.addRole(createRole(line));
             } else {

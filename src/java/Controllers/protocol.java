@@ -21,6 +21,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import security.Environment;
+import security.Protocol;
+import security.ProtocolParser;
 
 /**
  *
@@ -103,11 +106,15 @@ public class protocol extends HttpServlet {
             if (i > 0) {
                 //byte[] b = new byte[i + 1];
                 BufferedReader br = new BufferedReader(new InputStreamReader(is));
-                while((line = br.readLine()) != null)
+                ProtocolParser parser = new ProtocolParser();
+                Protocol protocol = parser.parseProtocol(br,raw);
+                Environment instance = new Environment(protocol);
+                session.setAttribute("environment", instance);
+                /*while((line = br.readLine()) != null)
                 {
                     System.out.println(line);
                     raw.add(line);
-                }
+                }*/
                 is.close();
                 RequestDispatcher rd = request.getRequestDispatcher("./protocol.jsp");
                 session.setAttribute("protocolR", raw);
