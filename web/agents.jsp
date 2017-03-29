@@ -214,37 +214,34 @@
                                 <h3 class="panel-title">Panel title</h3>
                             </div>
                             <div class="panel-body">
-                                Panel content
+                                <form method="POST" enctype="multipart/form-data" action="agents">
+                                        <div class="form-group input-group">
+                                <span class="input-group-addon"><i class="fa fa-eur"></i></span>
+                                <input type="text" class="form-control" placeholder="Enter Name Here">
+                            </div>
+                                </form>
+                                
                             </div>
                         </div>
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Panel title</h3>
-                            </div>
-                            <div class="panel-body">
-                                <div class="col-sm-6">
-                                    <ul class="list-group">
-                                        <li class="list-group-item">Cras justo odio</li>
-                                        <li class="list-group-item">Dapibus ac facilisis in</li>
-                                        <li class="list-group-item">Morbi leo risus</li>
-                                        <li class="list-group-item">Porta ac consectetur ac</li>
-                                        <li class="list-group-item">Vestibulum at eros</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
                 <% 
-                    //get agents //
+                    //get agents 
+                    security.Environment environment = (security.Environment)request.getSession().getAttribute("environment");
+                    if(environment==null){%>
+                    <p>No Protocol Uploaded</p>
+                    <%}else if(environment.getAgents().size()==0){%>
+                        <p>No Agents Created</p>
+                        <%}else{
                     //if null then p
                     //is there then loop
-                    for(int i=0;i<3;i++) {%>
+                    for(int i=0;i<environment.getAgents().size();i++) {%>
                     <div class="row">
                     <div class="col-sm-12">
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h3 class="panel-title">Panel title</h3>
+                                <h3 class="panel-title"><%=environment.getAgents().get(i).getAgentDescription()%></h3>
                             </div>
                             <div class="panel-body">
                                 <div class="col-sm-6">
@@ -265,7 +262,7 @@
                         </div>
                     </div>
                 </div>
-                <%}%>
+                <%}}%>
             </div>
         </div>
         <!-- /#page-wrapper -->

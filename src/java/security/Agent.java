@@ -199,4 +199,8 @@ public class Agent {
         }
     }
     
+    public String getAgentDescription() {
+        return "Name: " + name + " | Run ID: " + runIdentifier + " | Step Counter: " + stepCounter;
+    }
+    
 }

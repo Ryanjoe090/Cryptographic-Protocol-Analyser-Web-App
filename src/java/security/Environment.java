@@ -239,6 +239,10 @@ public class Environment {
         return protocol;
     }
     
+    public List<Agent> getAgents() {
+        return agents;
+    }
+    
     
 
 }
