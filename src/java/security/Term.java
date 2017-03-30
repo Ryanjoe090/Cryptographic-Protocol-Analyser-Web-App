@@ -197,7 +197,13 @@ public class Term {
     {
         this.termString = term.termString;
         this.type = term.type;
-        this.subTerms = term.subTerms;
+        this.subTerms = new LinkedList<>(); //HAHAHAHA
+        for(int i=0;i<term.arity;i++)
+        {
+            Term newTerm = new Term();
+            newTerm.overwriteTerm(term.subTerms.get(i));
+            this.subTerms.add(newTerm);
+        }
         this.arity = term.arity;
     }
     

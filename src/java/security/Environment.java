@@ -95,8 +95,8 @@ public class Environment {
                 role.setAllKnowledge(new LinkedList(protocol.getRole().get(roleMap.get(roleAgent)).getKnowledge()));
                 role.setAllSteps(new LinkedList(protocol.getRole().get(roleMap.get(roleAgent)).getSteps()));
                 List<Term> knowledge = new LinkedList(role.getKnowledge());
-                agents.get(id).setRole(role);
-                agents.get(id).setKnowledge(knowledge);
+                agents.get(id).setRole(role); //PROBLEM
+                agents.get(id).setKnowledge(knowledge); //PROBLEM
                 Term newPublic = new Term(agents.get(id).getName(),Type.PUBLIC,0);
                 Term oldTerm = new Term(protocol.getRole().get(roleMap.get(roleAgent)).getAgent(),Type.VARIABLE,0);
                 agents.get(id).correctVariable(newPublic, oldTerm);

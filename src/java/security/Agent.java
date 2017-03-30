@@ -41,7 +41,13 @@ public class Agent {
     
     public void setKnowledge(List<Term> knowledge)
     {
-        this.knowledge = knowledge;
+        //this.knowledge = knowledge;
+        this.knowledge = new LinkedList();
+        for(Term term : knowledge) {
+            Term newTerm = new Term();
+            newTerm.overwriteTerm(term);
+            this.knowledge.add(newTerm);
+        }
     }
     
     public void addKnowledge(Term term)
