@@ -154,19 +154,19 @@
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
                     <li class="active">
-                        <a href="index.html"><i class="fa fa-fw fa-home"></i> Home</a>
+                        <a href="./index.jsp"><i class="fa fa-fw fa-home"></i> Home</a>
                     </li>
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-user"></i> Agents</a>
+                        <a href="./agents"><i class="fa fa-fw fa-user"></i> Agents</a>
                     </li>
                     <li>
-                        <a href="tables.html"><i class="fa fa-fw fa-list"></i> Roles</a>
+                        <a href="./roles.jsp"><i class="fa fa-fw fa-list"></i> Roles</a>
                     </li>
                     <li>
                         <a href="forms.html"><i class="fa fa-fw fa-wifi"></i> Network Buffer</a>
                     </li>
                     <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-file-text"></i> Protocol Base File</a>
+                        <a href="./protocol"><i class="fa fa-fw fa-file-text"></i> Protocol Base File</a>
                     </li>
                     <li>
                         <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Steps</a>

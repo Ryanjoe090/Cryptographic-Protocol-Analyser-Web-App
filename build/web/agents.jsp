@@ -155,19 +155,19 @@
                 <div class="collapse navbar-collapse navbar-ex1-collapse">
                     <ul class="nav navbar-nav side-nav">
                         <li class="active">
-                            <a href="index.html"><i class="fa fa-fw fa-home"></i> Home</a>
+                            <a href="./index.jsp"><i class="fa fa-fw fa-home"></i> Home</a>
                         </li>
                         <li>
-                            <a href="charts.html"><i class="fa fa-fw fa-user"></i> Agents</a>
+                            <a href="./agents"><i class="fa fa-fw fa-user"></i> Agents</a>
                         </li>
                         <li>
-                            <a href="tables.html"><i class="fa fa-fw fa-list"></i> Roles</a>
+                            <a href="./roles.jsp"><i class="fa fa-fw fa-list"></i> Roles</a>
                         </li>
                         <li>
                             <a href="forms.html"><i class="fa fa-fw fa-wifi"></i> Network Buffer</a>
                         </li>
                         <li>
-                            <a href="bootstrap-elements.html"><i class="fa fa-fw fa-file-text"></i> Protocol Base File</a>
+                            <a href="./protocol"><i class="fa fa-fw fa-file-text"></i> Protocol Base File</a>
                         </li>
                         <li>
                             <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Steps</a>
@@ -229,7 +229,7 @@
                                         <div class="form-group">
                                             <label for="selectRole">Select Role</label>
                                             <select id="selectRole" name="selectRoleChar" class="form-control">
-                                                <%for(int i=0;i<environment.getProtocol().getRole().size();i++) {%>
+                                                <%for (int i = 0; i < environment.getProtocol().getRole().size(); i++) {%>
                                                 <option><%=environment.getProtocol().getRole().get(i).getAgent()%></option>
                                                 <%}%>
                                             </select>
@@ -245,33 +245,33 @@
                     </div>
                     <p>No Agents Created</p>
                     <%} else {%>
-                        <div class="col-sm-12">
-                            <div class="panel panel-default">
-                                <div class="panel-heading">
-                                    <h3 class="panel-title">Add Agent</h3>
-                                </div>
-                                <div class="panel-body">
-                                    <form method="POST" enctype="multipart/form-data" action="agents">
-                                        <div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-user"></i><i class="fa fa-plus"></i></span>
-                                            <input type="text" name="name" class="form-control" placeholder="Enter Name Here">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="selectRole">Select Role</label>
-                                            <select id="selectRole" name="selectRoleChar" class="form-control">
-                                                <%for(int i=0;i<environment.getProtocol().getRole().size();i++) {%>
-                                                <option><%=environment.getProtocol().getRole().get(i).getAgent()%></option>
-                                                <%}%>
-                                            </select>
-                                        </div>
-
-                                        <button type="submit" class="btn btn-danger" name="postAgent" value="ADD">Add Agent</button>
-                                    </form>
-
-                                </div>
+                    <div class="col-sm-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Add Agent</h3>
                             </div>
+                            <div class="panel-body">
+                                <form method="POST" enctype="multipart/form-data" action="agents">
+                                    <div class="form-group input-group">
+                                        <span class="input-group-addon"><i class="fa fa-user"></i><i class="fa fa-plus"></i></span>
+                                        <input type="text" name="name" class="form-control" placeholder="Enter Name Here">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="selectRole">Select Role</label>
+                                        <select id="selectRole" name="selectRoleChar" class="form-control">
+                                            <%for (int i = 0; i < environment.getProtocol().getRole().size(); i++) {%>
+                                            <option><%=environment.getProtocol().getRole().get(i).getAgent()%></option>
+                                            <%}%>
+                                        </select>
+                                    </div>
 
+                                    <button type="submit" class="btn btn-danger" name="postAgent" value="ADD">Add Agent</button>
+                                </form>
+
+                            </div>
                         </div>
+
+                    </div>
                     <%
                         //if null then p
                         //is there then loop
@@ -285,16 +285,16 @@
                                 <div class="panel-body">
                                     <div class="col-sm-3">
                                         <ul class="list-group">
-                                            <%for(int j=0;j<environment.getAgents().get(i).getKnowledge().size();j++){%>
+                                            <%for (int j = 0; j < environment.getAgents().get(i).getKnowledge().size(); j++) {%>
                                             <li class="list-group-item"><%=environment.getAgents().get(i).getKnowledge().get(j).getTermString()%></li>
-                                            <%}%>
+                                                <%}%>
                                         </ul>
                                     </div>
-                                        <div class="col-sm-3">
+                                    <div class="col-sm-3">
                                         <ul class="list-group">
-                                            <%for(int j=0;j<environment.getAgents().get(i).getRole().getSteps().size();j++){%>
+                                            <%for (int j = 0; j < environment.getAgents().get(i).getRole().getSteps().size(); j++) {%>
                                             <li class="list-group-item"><%=environment.getAgents().get(i).getRole().getSteps().get(j).getDescription()%></li>
-                                            <%}%>
+                                                <%}%>
                                         </ul>
                                     </div>
                                     <div class="col-sm-6">
