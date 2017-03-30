@@ -222,7 +222,7 @@
                                 <div style="position: relative;">
                                     <div class="form-group input-group">
                                             <span class="input-group-addon"><i class="fa fa-tag"></i></span>
-                                            <input type="text" name="newTermString" class="form-control" placeholder="Enter Name Here">
+                                            <input type="text" id="newTermString" class="form-control" placeholder="Enter String Here">
                                         </div>
                                 </div>
                                 <br>
