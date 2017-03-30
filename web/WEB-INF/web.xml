@@ -4,9 +4,17 @@
         <servlet-name>agents</servlet-name>
         <servlet-class>Controllers.agents</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ajax</servlet-name>
+        <servlet-class>Controllers.ajax</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>agents</servlet-name>
         <url-pattern>/agents</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ajax</servlet-name>
+        <url-pattern>/ajax</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
