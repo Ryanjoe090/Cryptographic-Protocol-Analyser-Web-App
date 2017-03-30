@@ -283,10 +283,17 @@
                                     <h3 class="panel-title"><%=environment.getAgents().get(i).getAgentDescription()%></h3>
                                 </div>
                                 <div class="panel-body">
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <ul class="list-group">
                                             <%for(int j=0;j<environment.getAgents().get(i).getKnowledge().size();j++){%>
                                             <li class="list-group-item"><%=environment.getAgents().get(i).getKnowledge().get(j).getTermString()%></li>
+                                            <%}%>
+                                        </ul>
+                                    </div>
+                                        <div class="col-sm-3">
+                                        <ul class="list-group">
+                                            <%for(int j=0;j<environment.getAgents().get(i).getRole().getSteps().size();j++){%>
+                                            <li class="list-group-item"><%=environment.getAgents().get(i).getRole().getSteps().get(j).getDescription()%></li>
                                             <%}%>
                                         </ul>
                                     </div>
