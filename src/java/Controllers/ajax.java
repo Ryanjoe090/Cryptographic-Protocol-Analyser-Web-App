@@ -5,17 +5,26 @@
  */
 package Controllers;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import security.Environment;
+import security.Term;
 
 /**
  *
  * @author ryanj
  */
+@WebServlet(name = "ajax", urlPatterns = {"/ajax", "/ajax/getVariables"})
+@MultipartConfig
 public class ajax extends HttpServlet {
 
     /**
@@ -35,7 +44,7 @@ public class ajax extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ajax</title>");            
+            out.println("<title>Servlet ajax</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ajax at " + request.getContextPath() + "</h1>");
@@ -56,7 +65,21 @@ public class ajax extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        Environment environment = (Environment)session.getAttribute("environment");
+        int lol = Integer.parseInt(request.getParameter("runID"));
+        String path = request.getServletPath();
+        if (path.equals("/ajax/getVariables")) {
+            List<Term> list = environment.getAgents().get(lol).getVariables();
+            //Json myJson = new Gson();
+            String json = new Gson().toJson(list);
+
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+            System.out.println("lel");
+        }
+        //processRequest(request, response);
     }
 
     /**

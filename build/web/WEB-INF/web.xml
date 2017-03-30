@@ -12,10 +12,6 @@
         <servlet-name>agents</servlet-name>
         <url-pattern>/agents</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ajax</servlet-name>
-        <url-pattern>/ajax</url-pattern>
-    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

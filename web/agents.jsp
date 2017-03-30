@@ -191,6 +191,52 @@
                 <!-- /.navbar-collapse -->
             </nav>
 
+            <div id="upModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <legend> 
+                                <i class="fa fa-check-square"></i>&nbsp;&nbsp;&nbsp;Correct Agent Variable
+                            </legend>
+                        </div>
+                        <div id="entry_fieldsg" class="modal-body">					
+                            <form id="uploader" enctype="multipart/form-data" method="POST">
+                                <label class="control-label">Select Variable:</label>
+                                <br>
+                                <div style="position:relative;">
+                                    <select id="selectVariable" name="selectedVariable" class="form-control">
+                                    </select>
+                                </div>
+                                <br>
+                                <label class="control-label">Select Type:</label>
+                                <br>
+                                <div style="position:relative;">
+                                    <select id="selectTermType" name="selectedTermType" class="form-control">
+                                        <option>Public</option>
+                                        <option>Fresh</option>
+                                    </select>
+                                </div>
+                                <br>
+                                <label class="control-label">New Term String:</label>
+                                <br>
+                                <div style="position: relative;">
+                                    <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                                            <input type="text" name="newTermString" class="form-control" placeholder="Enter Name Here">
+                                        </div>
+                                </div>
+                                <br>
+                                <button type="submit" onclick="upload3(event)" class="btn btn-primary">Submit</button>					
+                            </form>
+                            <br>
+                            <div id="proBar"  hidden class="progress">
+                                <div id="proBar2" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id="page-wrapper">
                 <div class="container-fluid">
 
@@ -298,7 +344,7 @@
                                         </ul>
                                     </div>
                                     <div class="col-sm-6">
-                                        <button type="button" class="btn btn-success btn-block">Change Knowledge</button>
+                                        <button type="button" class="btn btn-success btn-block" onclick="getVariables(event,<%=environment.getAgents().get(i).getRunIdentifier()%>)">Change Knowledge</button>
                                         <button type="button" class="btn btn-info btn-block">Take Step</button>
                                         <button type="button" class="btn btn-danger btn-block">Delete Agent</button>
                                     </div>
@@ -317,6 +363,7 @@
 
         <!-- jQuery -->
         <script src="js/jquery.js"></script>
+        <script src="js/ajax.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>
