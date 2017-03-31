@@ -161,7 +161,7 @@ public class Environment {
         return agents.size()-1;
     }
 
-    public boolean takeStep(int runIdentifier, Scanner reader) {
+    public boolean takeStep(int runIdentifier, int networkBufferIndex) {
         int counter = agents.get(runIdentifier).getStepCounter();
         Step step;
         if(counter > agents.get(runIdentifier).getRole().getSteps().size()-1)
@@ -177,30 +177,6 @@ public class Environment {
             if(step.getAction().equals(Action.SEND))
             {
                 System.out.println("Ree");
-                //messageMap.get(runIdentifier).add(step.getTerm()); 
-                //ask user whom they wish to send to
-                /*System.out.println("Send to: ");
-                //loop to list ALL people of 'ROLE S'
-                for(Agent agent : agents)
-                {
-                    if(agent.getRole().getAgent().equals(step.getRecipiant()))
-                    {
-                        System.out.println(agent.getRunIdentifier() + ": " + agent.getName());
-                    }
-                }
-                //take user input
-                int runID = reader.nextInt();*/
-                //CHECK TO SEE IF SELECTED RUN IDENTIFIER MATCHES AGENT OF ROLE S
-                /*if(!agents.get(runID).getRole().getAgent().equals(step.getRecipiant()))
-                {
-                    //messageMap.add(step.getTerm().getTermString()+":"+runID);
-                    return false;
-                }
-                else
-                {
-                    messageMap.add(step.getTerm().getTermString()+":"+runID);
-                }*/
-                //if so add to messageMap ::::APPEND RECIPIANT
                 //add to network buffer
                 messageMap.add(step.getTerm().getTermString()+":"+step.getRecipiant());
                 networkBuffer.add(step.getTerm());
@@ -212,7 +188,8 @@ public class Environment {
                 {
                     System.out.println(i+":"+networkBuffer.get(i).getTermString());
                 }
-                int bufferTerm = reader.nextInt();
+                //int bufferTerm = reader.nextInt();
+                int bufferTerm = networkBufferIndex;
                 //if(messageMap.contains(step.getTerm().getTermString()+":"+runIdentifier))
                 if(networkBuffer.get(bufferTerm).equals(step.getTerm()))
                 {
@@ -249,6 +226,10 @@ public class Environment {
     
     public List<Agent> getAgents() {
         return agents;
+    }
+    
+    public List<Term> getNetworkBuffer() {
+        return networkBuffer;
     }
     
     

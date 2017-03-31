@@ -23,7 +23,8 @@ import security.Term;
  *
  * @author ryanj
  */
-@WebServlet(name = "agents", urlPatterns = {"/agents"})@MultipartConfig
+@WebServlet(name = "agents", urlPatterns = {"/agents"})
+@MultipartConfig
 public class agents extends HttpServlet {
 
     /**
@@ -43,7 +44,7 @@ public class agents extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet agents</title>");            
+            out.println("<title>Servlet agents</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet agents at " + request.getContextPath() + "</h1>");
@@ -83,16 +84,14 @@ public class agents extends HttpServlet {
         //I PROBABLY WANT AN ARGUMENT MAP HERE TO SELECT COMMAND
         //processRequest(request, response);
         HttpSession session = request.getSession();
-        Environment environment = (Environment)session.getAttribute("environment");
-        
-        if(request.getParameter("postAgent").equals("ADD"))
-        {
-            
+        Environment environment = (Environment) session.getAttribute("environment");
+
+        if (request.getParameter("postAgent").equals("ADD")) {
+
             String nameParam = request.getParameter("name");
             String roleAgent = request.getParameter("selectRoleChar");
             environment.addAgent(nameParam, roleAgent);
-        }
-        else if(request.getParameter("postAgent").equals("CHANGE")) {
+        } else if (request.getParameter("postAgent").equals("CHANGE")) {
             int lol = Integer.parseInt(request.getParameter("currentAgent"));
             List<Term> list = environment.getAgents().get(lol).getVariables();
             int variableIndex = Integer.parseInt(request.getParameter("selectedVariable"));
@@ -100,8 +99,17 @@ public class agents extends HttpServlet {
             int variableType = Integer.parseInt(request.getParameter("selectedTermType"));
             String newTermString = request.getParameter("newTermString");
             System.out.println("stalllol");
-            environment.correctVariable(lol,variableIndex,variableType,newTermString);
+            environment.correctVariable(lol, variableIndex, variableType, newTermString);
+        } else if (request.getParameter("postAgent").equals("STEP")) {
+            int networkBufferIndex =0 ;
+            int lol = Integer.parseInt(request.getParameter("currentStepAgent"));
+            String action = request.getParameter("currentAction");
+            if (action.equals("RECIEVE")) {
+                networkBufferIndex = Integer.parseInt(request.getParameter("selectedTerm"));
+            }
+            environment.takeStep(lol, networkBufferIndex);
         }
+
         RequestDispatcher rd = request.getRequestDispatcher("./agents.jsp");
         rd.forward(request, response);
     }

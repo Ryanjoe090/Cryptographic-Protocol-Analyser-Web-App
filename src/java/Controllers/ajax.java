@@ -24,7 +24,7 @@ import security.Term;
  *
  * @author ryanj
  */
-@WebServlet(name = "ajax", urlPatterns = {"/ajax", "/ajax/getVariables", "/ajax/changeVariable"})
+@WebServlet(name = "ajax", urlPatterns = {"/ajax", "/ajax/getVariables", "/ajax/changeVariable", "/ajax/getNetworkBuffer"})
 @MultipartConfig
 public class ajax extends HttpServlet {
 
@@ -87,6 +87,13 @@ public class ajax extends HttpServlet {
             String newTermString = request.getParameter("newTermString");
             System.out.println("stalllol");
             environment.correctVariable(lol,variableIndex,variableType,newTermString);
+        }
+        else if(path.equals("/ajax/getNetworkBuffer")) {
+            List<Term> list = environment.getNetworkBuffer();
+            String json = new Gson().toJson(list);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
         }
         //processRequest(request, response);
     }

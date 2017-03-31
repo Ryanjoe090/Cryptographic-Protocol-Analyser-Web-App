@@ -237,6 +237,38 @@
                     </div>
                 </div>
             </div>
+            
+            <div id="stepModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <legend> 
+                                <i class="fa fa-check-square"></i>&nbsp;&nbsp;&nbsp;Take Step
+                            </legend>
+                        </div>
+                        <div id="entry_fieldsg" class="modal-body">	
+                            <form method="POST" enctype="multipart/form-data" action="agents">
+                                <input id="currentStepAgent" name="currentStepAgent" hidden="true" value="0">
+                                <input id="currentAction" name="currentAction" hidden="true" value="0">
+                                <label class="control-label">Select Term from Buffer:</label>
+                                <br>
+                                <div style="position:relative;">
+                                    <select id="selectTerm" name="selectedTerm" class="form-control">
+                                    </select>
+                                </div>
+                                <br>
+                                <label id="currentStep" class="control-label">STEP</label>
+                                <br>
+                                <button type="submit" class="btn btn-primary" name="postAgent" value="STEP">Submit</button>	
+                            </form>
+                            <br>
+                            <div id="proBar"  hidden class="progress">
+                                <div id="proBar2" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div id="page-wrapper">
                 <div class="container-fluid">
@@ -346,7 +378,9 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <button type="button" class="btn btn-success btn-block" onclick="getVariables(event,<%=environment.getAgents().get(i).getRunIdentifier()%>)">Change Knowledge</button>
-                                        <button type="button" class="btn btn-info btn-block">Take Step</button>
+                                        <%if(environment.getAgents().get(i).getStepCounter() < environment.getAgents().get(i).getRole().getSteps().size()){ %>
+                                        <button type="button" class="btn btn-info btn-block" onclick="getStep(event,<%=environment.getAgents().get(i).getRunIdentifier()%>,'<%=environment.getAgents().get(i).getRole().getSteps().get(environment.getAgents().get(i).getStepCounter()).getDescription()%>','<%=environment.getAgents().get(i).getRole().getSteps().get(environment.getAgents().get(i).getStepCounter()).getAction()%>')">Take Step</button>
+                                        <%}%>
                                         <button type="button" class="btn btn-danger btn-block">Delete Agent</button>
                                     </div>
                                 </div>

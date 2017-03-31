@@ -70,7 +70,7 @@ public class Step {
         this.term.overwriteTerm(step.term);
         this.action = step.action;
         this.recipiant = step.recipiant;
-    }
+    }    
     
     public String getDescription()
     {
