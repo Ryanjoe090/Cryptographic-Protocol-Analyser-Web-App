@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -23,7 +24,7 @@ import security.Term;
  *
  * @author ryanj
  */
-@WebServlet(name = "ajax", urlPatterns = {"/ajax", "/ajax/getVariables"})
+@WebServlet(name = "ajax", urlPatterns = {"/ajax", "/ajax/getVariables", "/ajax/changeVariable"})
 @MultipartConfig
 public class ajax extends HttpServlet {
 
@@ -78,6 +79,14 @@ public class ajax extends HttpServlet {
             response.setCharacterEncoding("UTF-8");
             response.getWriter().write(json);
             System.out.println("lel");
+        }
+        else if(path.equals("/ajax/changeVariable")) {
+            List<Term> list = environment.getAgents().get(lol).getVariables();
+            int variableIndex = Integer.parseInt(request.getParameter("variableIndex"));
+            int variableType = Integer.parseInt(request.getParameter("variableType"));
+            String newTermString = request.getParameter("newTermString");
+            System.out.println("stalllol");
+            environment.correctVariable(lol,variableIndex,variableType,newTermString);
         }
         //processRequest(request, response);
     }

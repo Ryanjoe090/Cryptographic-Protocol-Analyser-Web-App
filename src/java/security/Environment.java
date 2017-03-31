@@ -105,23 +105,23 @@ public class Environment {
                 }
     }
     
-    public void correctVariable(Scanner reader)
+    public void correctVariable(int runID, int variableIndex, int variableType, String newTString)
     {
         System.out.println("\nCHOOSE AGENT TO CORRECT KNOWLEDGE:");
         for(Agent agent : agents)
         {
             System.out.println(agent.getRunIdentifier() + ": " + agent.getName());
         }
-        int agentID = reader.nextInt();
+        int agentID = runID;
         List<Term> variables = agents.get(agentID).getVariables();
         System.out.println("\nCHOOSE VARIABLE TO CORRECT:");
         for(int i=0;i<variables.size();i++)
         {
             System.out.println(i + ": " + variables.get(i).getTermString());
         }
-        int variableID = reader.nextInt();
+        int variableID = variableIndex;
         System.out.println("\nCORRECT WITH\n1: Public\n2: Fresh");
-        int correctWith = reader.nextInt();
+        int correctWith = variableType;
         if(correctWith==1)
         {
             //correct with agent
@@ -131,7 +131,7 @@ public class Environment {
                 System.out.println(agent.getRunIdentifier() + ": " + agent.getName());
             }*/
             //int replaceID = reader.nextInt();
-            String newTermString = reader.next();
+            String newTermString = newTString;
             //agents.get(agentID).correctVariable(new Term(agents.get(replaceID).getName(),Type.PUBLIC,0), variables.get(variableID));
             agents.get(agentID).correctVariable(new Term(newTermString,Type.PUBLIC,0), variables.get(variableID));
             //now correct recipient in steps

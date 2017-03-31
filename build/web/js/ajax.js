@@ -5,6 +5,7 @@
  */
 
 function getVariables(event, runID) {
+    $("#currentAgent").val(runID)
     $.get("./ajax/getVariables",
             {
                 runID: runID
@@ -13,7 +14,7 @@ function getVariables(event, runID) {
                 //alert("Data: " + data + "\nStatus: " + status);
                 var $select = $("#selectVariable");
                 $select.find("option").remove();
-                $("#upModal").modal();
+                //$("#upModal").modal();
                 $.each(data, function (index, item) {               // Iterate over the JSON object.
                     $("<option>").val(index).text(item.termString).appendTo($select); // Create HTML <option> element, set its value with currently iterated key and its text content with currently iterated item and finally append it to the <select>.
                     //alert(item.termString);
@@ -24,11 +25,13 @@ function getVariables(event, runID) {
     //}
 }
 
-function getVariables(event, runID) {
+function correctVariables(event) {
+    alert("ree?");
+    var runID = $("#currentAgent").val();
     var variableIndex = $("#selectVariable").val();
-    var variableType =  $("#selectTermType").text();
-    var newTermString = $("#newTermString").text(); 
-    $.post("./ajax/changeVariable",
+    var variableType =  $("#selectTermType").val();
+    var newTermString = $("#newTermString").val(); 
+    $.get("./ajax/changeVariable",
             {
                 runID: runID,
                 variableIndex: variableIndex,
@@ -37,16 +40,8 @@ function getVariables(event, runID) {
                 
             },
             function (data, status) {
-                //alert("Data: " + data + "\nStatus: " + status);
-                var $select = $("#selectVariable");
-                $select.find("option").remove();
-                $("#upModal").modal();
-                $.each(data, function (index, item) {               // Iterate over the JSON object.
-                    $("<option>").val(index).text(item.termString).appendTo($select); // Create HTML <option> element, set its value with currently iterated key and its text content with currently iterated item and finally append it to the <select>.
-                    //alert(item.termString);
-                });
-                $("#upModal").modal();
-
+                alert("Data: " + data + "\nStatus: " + status);
+                
             });
     //}
 }

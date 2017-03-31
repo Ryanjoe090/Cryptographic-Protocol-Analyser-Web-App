@@ -7,6 +7,7 @@ package Controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import security.Environment;
+import security.Term;
 
 /**
  *
@@ -81,12 +83,24 @@ public class agents extends HttpServlet {
         //I PROBABLY WANT AN ARGUMENT MAP HERE TO SELECT COMMAND
         //processRequest(request, response);
         HttpSession session = request.getSession();
+        Environment environment = (Environment)session.getAttribute("environment");
+        
         if(request.getParameter("postAgent").equals("ADD"))
         {
-            Environment environment = (Environment)session.getAttribute("environment");
+            
             String nameParam = request.getParameter("name");
             String roleAgent = request.getParameter("selectRoleChar");
             environment.addAgent(nameParam, roleAgent);
+        }
+        else if(request.getParameter("postAgent").equals("CHANGE")) {
+            int lol = Integer.parseInt(request.getParameter("currentAgent"));
+            List<Term> list = environment.getAgents().get(lol).getVariables();
+            int variableIndex = Integer.parseInt(request.getParameter("selectedVariable"));
+            String test = request.getParameter("selectedTermType");
+            int variableType = Integer.parseInt(request.getParameter("selectedTermType"));
+            String newTermString = request.getParameter("newTermString");
+            System.out.println("stalllol");
+            environment.correctVariable(lol,variableIndex,variableType,newTermString);
         }
         RequestDispatcher rd = request.getRequestDispatcher("./agents.jsp");
         rd.forward(request, response);

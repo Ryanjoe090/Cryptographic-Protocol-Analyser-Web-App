@@ -199,8 +199,9 @@
                                 <i class="fa fa-check-square"></i>&nbsp;&nbsp;&nbsp;Correct Agent Variable
                             </legend>
                         </div>
-                        <div id="entry_fieldsg" class="modal-body">					
-                            <form id="uploader" enctype="multipart/form-data" method="POST">
+                        <div id="entry_fieldsg" class="modal-body">	
+                            <form method="POST" enctype="multipart/form-data" action="agents">
+                                <input id="currentAgent" name="currentAgent" hidden="true" value="0">
                                 <label class="control-label">Select Variable:</label>
                                 <br>
                                 <div style="position:relative;">
@@ -212,8 +213,8 @@
                                 <br>
                                 <div style="position:relative;">
                                     <select id="selectTermType" name="selectedTermType" class="form-control">
-                                        <option>Public</option>
-                                        <option>Fresh</option>
+                                        <option value="1">Public</option>
+                                        <option value="2">Fresh</option>
                                     </select>
                                 </div>
                                 <br>
@@ -221,12 +222,12 @@
                                 <br>
                                 <div style="position: relative;">
                                     <div class="form-group input-group">
-                                            <span class="input-group-addon"><i class="fa fa-tag"></i></span>
-                                            <input type="text" id="newTermString" class="form-control" placeholder="Enter String Here">
-                                        </div>
+                                        <span class="input-group-addon"><i class="fa fa-tag"></i></span>
+                                        <input type="text" name="newTermString" class="form-control" placeholder="Enter String Here">
+                                    </div>
                                 </div>
                                 <br>
-                                <button type="submit" onclick="upload3(event)" class="btn btn-primary">Submit</button>					
+                                <button type="submit" class="btn btn-primary" name="postAgent" value="CHANGE">Submit</button>	
                             </form>
                             <br>
                             <div id="proBar"  hidden class="progress">
