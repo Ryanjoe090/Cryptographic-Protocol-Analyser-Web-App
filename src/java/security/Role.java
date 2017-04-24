@@ -36,6 +36,16 @@ public class Role {
         initialKnowledge = new LinkedList<>();
     }
     
+    //COPY CONSTRUCTOR
+    public Role(Role role)
+    {
+        this.agent = role.agent;
+        this.steps = new LinkedList<>();
+        this.initialKnowledge = new LinkedList<>();
+        this.setAllSteps(role.getSteps());
+        this.setAllKnowledge(role.getKnowledge());
+    }
+    
     public void add(Step step)
     {
         steps.add(step);

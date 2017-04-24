@@ -174,16 +174,17 @@ public class Environment {
                 networkBuffer.add(step.getTerm());
             } else if (step.getAction().equals(Action.RECIEVE)) {
                 //if there is a message for me check if it is in the messageMap
+                Role oldrole = new Role(agents.get(runIdentifier).getRole()); //this is for keeping a record of old role before variable changes
                 for (int i = 0; i < networkBuffer.size(); i++) {
                     System.out.println(i + ":" + networkBuffer.get(i).getTermString());
                 }
                 //int bufferTerm = reader.nextInt();
                 int bufferTerm = networkBufferIndex;
                 //if(messageMap.contains(step.getTerm().getTermString()+":"+runIdentifier))
-                if (step.getTerm().canRecieve(networkBuffer.get(bufferTerm))) { //need unique comparator for variables                    
+                if (step.getTerm().canRecieve(networkBuffer.get(bufferTerm), agents.get(runIdentifier))) { //need unique comparator for variables                    
                     agents.get(runIdentifier).addKnowledge(networkBuffer.get(bufferTerm));
                 } 
-                else {
+                else { //correct role
                     return false;
                 }
 //                for(String message : messageMap)
