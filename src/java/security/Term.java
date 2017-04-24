@@ -220,7 +220,10 @@ public class Term {
                     && Term.recieveSubterms(subTerms, bufferTerm.subTerms, agent));
 
             if (myBool == true && type.equals(Type.VARIABLE)) {
-                agent.correctVariable(bufferTerm, this); //always base
+                //maybe set old term string here to search recipiants
+                Term term = new Term();
+                term.overwriteTerm(this);
+                agent.correctVariable(bufferTerm, term); //always base
                 //now correct recipient in steps
 //                for (int i = 0; i < agent.getRole().getSteps().size(); i++) {
 //                    if (agent.getRole().getSteps().get(i).getAction().equals(Step.Action.SEND)) {
