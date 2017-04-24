@@ -221,6 +221,7 @@ public class Term {
             return false;
         }
         Term comp = (Term) obj;
+        
         return arity == comp.arity &&
                 Objects.equals(termString, comp.termString) &&
                 Objects.equals(type, comp.type) &&
@@ -230,6 +231,41 @@ public class Term {
     @Override
     public int hashCode() {
         return Objects.hash(arity, termString, type, subTerms);
+    }
+    
+    public boolean canRecieve(Term bufferTerm)
+    {
+        if(this.equals(bufferTerm))
+        {
+            return true;
+        }
+//        else if(!this.type.equals(Type.VARIABLE))
+//        {
+//            return false;
+//        }
+        else
+        {
+            boolean  myBool =  (arity == bufferTerm.arity &&
+                    (Objects.equals(type, bufferTerm.type) || type.equals(Type.VARIABLE)) &&
+                    Term.recieveSubterms(subTerms, bufferTerm.subTerms));
+            
+             //if(myBool == true && type.);
+            return myBool;
+        }
+        
+    }
+    
+    public static boolean recieveSubterms(List<Term> termList, List<Term> bufferList)
+    {
+        boolean myBoolean = true;
+        for(int i=0; i<termList.size();i++)
+        {
+            myBoolean = termList.get(i).canRecieve(bufferList.get(i));
+            if(myBoolean == false)
+                return false;
+        }
+        
+        return myBoolean;
     }
     
 }
