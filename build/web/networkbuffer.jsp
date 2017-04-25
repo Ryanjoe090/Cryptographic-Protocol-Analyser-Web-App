@@ -214,7 +214,7 @@
                                     </select>
                                 </div>
                                 <br>
-                                <button type="submit" class="btn btn-primary" name="postAgent" value="CHANGE">Submit</button>	
+                                <button id="postcommand" type="submit" class="btn btn-primary" name="postCommand" value="placehold">Submit</button>	
                             </form>
                             <br>
                             <div id="proBar"  hidden class="progress">

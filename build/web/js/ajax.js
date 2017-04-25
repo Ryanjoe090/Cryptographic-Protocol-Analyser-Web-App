@@ -30,7 +30,7 @@ function getStep(event, runID, stepDescription, action) {
     $("#currentAction").val(action);
     $("#currentStep").val(stepDescription).text(stepDescription);
     if (action == 'SEND') {
-        alert(stepDescription);
+        //alert(stepDescription);
         //$("#currentStepAgent").val(runID);
         //$("#currentAction").val(action);
         //$("#currentStep").val(stepDescription).text(stepDescription);
@@ -51,7 +51,7 @@ function getStep(event, runID, stepDescription, action) {
                     //$("#upModal").modal();
                     $.each(data, function (index, item) {               // Iterate over the JSON object.
                         $("<option>").val(index).text(item.termString).appendTo($select); // Create HTML <option> element, set its value with currently iterated key and its text content with currently iterated item and finally append it to the <select>.
-                        alert(item.termString);
+                        //alert(item.termString);
                     });
                     $("#stepModal").modal();
 
@@ -93,6 +93,7 @@ function getEncrypt(event) {
                 //alert("Data: " + data + "\nStatus: " + status);
                 var $select = $("#selectTermsEncrypt");
                 var $keys = $("#selectKey");
+                $("#postcommand").val('ENCRYPT');
                 $select.find("option").remove();
                 $keys.find("option").remove();
                 //$("#upModal").modal();

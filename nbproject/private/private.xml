@@ -3,9 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Think/testNetbeansRemove/newproject/src/java/security/Environment.java</file>
+            <file>file:/C:/Users/Think/testNetbeansRemove/newproject/web/js/ajax.js</file>
+            <file>file:/C:/Users/Think/testNetbeansRemove/newproject/src/java/Controllers/networkbuffer.java</file>
+            <file>file:/C:/Users/Think/testNetbeansRemove/newproject/web/networkbuffer.jsp</file>
             <file>file:/C:/Users/Think/testNetbeansRemove/newproject/src/java/Controllers/ajax.java</file>
-            <file>file:/C:/Users/Think/testNetbeansRemove/newproject/src/java/security/Agent.java</file>
+            <file>file:/C:/Users/Think/testNetbeansRemove/newproject/src/java/Controllers/agents.java</file>
+            <file>file:/C:/Users/Think/testNetbeansRemove/newproject/src/java/Controllers/protocol.java</file>
+            <file>file:/C:/Users/Think/testNetbeansRemove/newproject/src/java/security/ProtocolParser.java</file>
         </group>
     </open-files>
 </project-private>
