@@ -210,16 +210,13 @@ public class Term {
     public boolean canRecieve(Term bufferTerm, Agent agent) {
         if (this.equals(bufferTerm)) {
             return true;
-        } //        else if(!this.type.equals(Type.VARIABLE))
-        //        {
-        //            return false;
-        //        }
+        } 
         else {
             boolean myBool = (arity == bufferTerm.arity
                     && (Objects.equals(type, bufferTerm.type) || type.equals(Type.VARIABLE))
                     && Term.recieveSubterms(subTerms, bufferTerm.subTerms, agent));
 
-            if (myBool == true && type.equals(Type.VARIABLE)) {
+            if (myBool == true && type.equals(Type.VARIABLE)) { //this means the old term is a variable so is open to accepting a public or fresh in its place
                 //maybe set old term string here to search recipiants
                 Term term = new Term();
                 term.overwriteTerm(this);

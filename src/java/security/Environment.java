@@ -22,6 +22,7 @@ public class Environment {
 
     private List<Agent> agents;
     private List<Term> networkBuffer;
+    private List<Term> networkKnowledge;
     private Protocol protocol;
     private Map<String, Integer> roleMap; //map for linking roles loaded from protocol to their posiition in the protocol role list eg. A->0 B->1 S->2
     private Map<Integer, String> agentMap; //map to link created agents to their position in the list eg. their run identifier. 
@@ -31,6 +32,7 @@ public class Environment {
         this.protocol = protocol;
         agents = new LinkedList<>();
         networkBuffer = new LinkedList<>();
+        networkKnowledge = new LinkedList<>();
         agentMap = new HashMap<>();
         roleMap = new HashMap<>();
         messageMap = new LinkedList<>();
@@ -171,7 +173,10 @@ public class Environment {
                 System.out.println("Ree");
                 //add to network buffer
                 messageMap.add(step.getTerm().getTermString() + ":" + step.getRecipiant());
+                Term knowledgeTerm = new Term();
+                knowledgeTerm.overwriteTerm(step.getTerm());
                 networkBuffer.add(step.getTerm());
+                networkKnowledge.add(knowledgeTerm);
             } else if (step.getAction().equals(Action.RECIEVE)) {
                 //if there is a message for me check if it is in the messageMap
                 Role oldrole = new Role(agents.get(runIdentifier).getRole()); //this is for keeping a record of old role before variable changes
@@ -216,6 +221,10 @@ public class Environment {
 
     public List<Term> getNetworkBuffer() {
         return networkBuffer;
+    }
+    
+    public List<Term> getNetworkKnowledge() {
+        return networkKnowledge;
     }
 
 }
