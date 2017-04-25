@@ -24,7 +24,7 @@ import security.Term;
  *
  * @author ryanj
  */
-@WebServlet(name = "ajax", urlPatterns = {"/ajax", "/ajax/getVariables", "/ajax/changeVariable", "/ajax/getNetworkBuffer"})
+@WebServlet(name = "ajax", urlPatterns = {"/ajax", "/ajax/getVariables", "/ajax/changeVariable", "/ajax/getNetworkBuffer", "/ajax/getNetworkKnowledge"})
 @MultipartConfig
 public class ajax extends HttpServlet {
 
@@ -68,6 +68,7 @@ public class ajax extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         Environment environment = (Environment)session.getAttribute("environment");
+        //if(path.equals("/ajax/getNetworkKnowledge"))
         int lol = Integer.parseInt(request.getParameter("runID"));
         String path = request.getServletPath();
         if (path.equals("/ajax/getVariables")) {
@@ -90,6 +91,13 @@ public class ajax extends HttpServlet {
         }
         else if(path.equals("/ajax/getNetworkBuffer")) {
             List<Term> list = environment.getNetworkBuffer();
+            String json = new Gson().toJson(list);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(json);
+        }
+        else if(path.equals("/ajax/getNetworkKnowledge")) {
+            List<Term> list = environment.getProtocol().getNetworkKnowledge();
             String json = new Gson().toJson(list);
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");

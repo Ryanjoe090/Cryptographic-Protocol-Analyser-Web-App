@@ -190,6 +190,40 @@
                 </div>
                 <!-- /.navbar-collapse -->
             </nav>
+            <div id="upModal" class="modal fade" role="dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <legend> 
+                                <i class="fa fa-check-square"></i>&nbsp;&nbsp;&nbsp;Encrypt
+                            </legend>
+                        </div>
+                        <div id="entry_fieldsg" class="modal-body">	
+                            <form method="POST" enctype="multipart/form-data" action="networkbuffer">
+                                <label class="control-label">Select Variable:</label>
+                                <br>
+                                <div style="position:relative;">
+                                    <select id="selectTermsEncrypt" name="selectedTerm" class="form-control" multiple>
+                                    </select>
+                                </div>
+                                <br>
+                                <label class="control-label">Select Key:</label>
+                                <br>
+                                <div style="position:relative;">
+                                    <select id="selectKey" name="selectedKey" class="form-control">
+                                    </select>
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-primary" name="postAgent" value="CHANGE">Submit</button>	
+                            </form>
+                            <br>
+                            <div id="proBar"  hidden class="progress">
+                                <div id="proBar2" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div id="page-wrapper">
                 <div class="container-fluid">
@@ -239,14 +273,14 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <ul class="list-group">                                     
-                                            <%for (int i = 0; i < environment.getNetworkKnowledge().size(); i++) {%> 
+                                            <%for (int i = 0; i < environment.getProtocol().getNetworkKnowledge().size(); i++) {%> 
                                             <li class="list-group-item">
-                                                <%=environment.getNetworkKnowledge().get(i).getTermString()%>
+                                                <%=environment.getProtocol().getNetworkKnowledge().get(i).getTermString()%>
                                             </li> <%}%>
                                         </ul>
                                     </div>
                                     <div class="col-sm-4">
-                                        <button type="button" class="btn btn-info btn-block">Encrypt</button>
+                                        <button type="button" class="btn btn-info btn-block" onclick="getEncrypt(event)">Encrypt</button>
                                         <button type="button" class="btn btn-danger btn-block">Decrypt</button>
                                         <button type="button" class="btn btn-success btn-block">Create Fresh</button>
                                         <button type="button" class="btn btn-warning btn-block">Hash Term</button>
@@ -266,6 +300,7 @@
 
         <!-- jQuery -->
         <script src="js/jquery.js"></script>
+        <script src="js/ajax.js"></script>
 
         <!-- Bootstrap Core JavaScript -->
         <script src="js/bootstrap.min.js"></script>

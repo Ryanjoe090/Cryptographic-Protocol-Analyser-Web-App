@@ -53,6 +53,17 @@ public class ProtocolParser {
 
         return role;
     }
+    
+    private void setNetworkKnowledge(String line) {
+        String parsee;
+        String [] knowledge;
+        parsee = line.replace(" ", "");
+        parsee = parsee.substring(parsee.lastIndexOf("network(") + 8, parsee.length() - 1);
+        knowledge = parsee.split(",");
+        for (String term : knowledge) {
+            protocol.addNetworkKnowledge(parser.parse(term));
+        }
+    }
 
     private void parseStep(String line) {
         if (line.contains("fresh(")) {
@@ -96,7 +107,11 @@ public class ProtocolParser {
             raw.add(line);
             if (line.contains("knows")) {
                 protocol.addRole(createRole(line));
-            } else {
+            }
+            else if(line.contains("network")) {
+                setNetworkKnowledge(line);
+            }
+            else {
                 parseStep(line);
             }
         }

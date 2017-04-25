@@ -14,12 +14,14 @@ import java.util.List;
  */
 public class Protocol {
     private List<Role> roles;
+    private List<Term> networkKnowledge;
     String name;
     
     public Protocol(String name)
     {
         this.name = name;
         roles = new LinkedList<>();
+        networkKnowledge = new LinkedList<>();
     }
     
     public void addRole(Role role)
@@ -41,5 +43,15 @@ public class Protocol {
     public List<Role> getRole()
     {
         return roles;
+    }
+    
+    public List<Term> getNetworkKnowledge()
+    {
+        return networkKnowledge;
+    }
+    
+    public void addNetworkKnowledge(Term term)
+    {
+        networkKnowledge.add(term);
     }
 }

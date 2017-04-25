@@ -81,4 +81,32 @@ function correctVariables(event) {
     //}
 }
 
+function getEncrypt(event) {
+    //$("#currentAgent").val(runID)
+    alert('encrypt');
+    //$("#upModal").modal();
+    $.get("./ajax/getNetworkKnowledge",
+            {
+                runID: 1
+            },
+            function (data, status) {
+                //alert("Data: " + data + "\nStatus: " + status);
+                var $select = $("#selectTermsEncrypt");
+                var $keys = $("#selectKey");
+                $select.find("option").remove();
+                $keys.find("option").remove();
+                //$("#upModal").modal();
+                $.each(data, function (index, item) {               // Iterate over the JSON object.
+                    $("<option>").val(index).text(item.termString).appendTo($select); // Create HTML <option> element, set its value with currently iterated key and its text content with currently iterated item and finally append it to the <select>.
+                    if(item.type == 'PK' || item.type == 'SK') {
+                        $("<option>").val(index).text(item.termString).appendTo($keys)
+                    }
+                    //alert(item.termString);
+                });
+                $("#upModal").modal();
+
+            });
+    
+}
+
 
