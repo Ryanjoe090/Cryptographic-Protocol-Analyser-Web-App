@@ -281,7 +281,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <button type="button" class="btn btn-info btn-block" onclick="getEncrypt(event)">Encrypt</button>
-                                        <button type="button" class="btn btn-danger btn-block">Decrypt</button>
+                                        <button type="button" class="btn btn-danger btn-block" onclick="getDecrypt(event)">Decrypt</button>
                                         <button type="button" class="btn btn-success btn-block">Create Fresh</button>
                                         <button type="button" class="btn btn-warning btn-block">Hash Term</button>
                                     </div>

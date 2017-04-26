@@ -59,12 +59,26 @@ public class Term {
      * @return possibly just return decrypt function on top and get derivation
      * to simplify
      */
-    public static List<Term> decrypt(Term decryptee, Term key) {
-        if (decryptee.subTerms.contains(key)) {
-            return decryptee.subTerms;
-        } else {
+    public static Term decrypt(Term decryptee, Term key) {
+        if (!decryptee.type.equals(Type.AENC)) {
             return null;
+        } else {
+            if(decryptee.subTerms.get(1).type.equals(Type.SK))
+            {
+                if(key.type.equals(Type.PK) && key.subTerms.get(0).termString.equals(decryptee.subTerms.get(1).subTerms.get(0).termString))
+                {
+                    return decryptee.subTerms.get(0);
+                }
+            }
+            else if(decryptee.subTerms.get(1).type.equals(Type.PK))
+            {
+                if(key.type.equals(Type.SK) && key.subTerms.get(0).termString.equals(decryptee.subTerms.get(1).subTerms.get(0).termString))
+                {
+                    return decryptee.subTerms.get(0);
+                }
+            }
         }
+        return null;
     }
 
     /**
