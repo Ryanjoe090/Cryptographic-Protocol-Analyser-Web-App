@@ -91,18 +91,36 @@ public class networkbuffer extends HttpServlet {
         if (request.getParameter("postCommand").equals("ENCRYPT")) {
             //Object generic = request.getPart("selectedTerm");
             String[] parameters = request.getParameterValues("selectedTerm");
-            if (parameters.length > 1) {
-                List<Term> finalList = new LinkedList<>();
-                for (int i = 0; i < parameters.length; i++) {
-                    System.out.println(environment.getProtocol().getNetworkKnowledge().get(Integer.parseInt(parameters[i])).getTermString());
-                    if(environment.getProtocol().getNetworkKnowledge().get(Integer.parseInt(parameters[i])).getType().equals(Type.LIST))
-                    {
-                        Derivation.breakdownTermList(environment.getProtocol().getNetworkKnowledge().get(Integer.parseInt(parameters[i])));
+            int keyValue = Integer.parseInt(request.getParameter("selectedKey"));
+            Term key = new Term();
+            key.overwriteTerm(environment.getProtocol().getNetworkKnowledge().get(keyValue));
+            LinkedList<Term> finalList = new LinkedList<>();
+            for (int i = 0; i < parameters.length; i++) {
+                System.out.println(environment.getProtocol().getNetworkKnowledge().get(Integer.parseInt(parameters[i])).getTermString());
+                if (environment.getProtocol().getNetworkKnowledge().get(Integer.parseInt(parameters[i])).getType().equals(Type.LIST)) {
+                    List<Term> tempList = new LinkedList<>();
+                    tempList.addAll(Derivation.breakdownTermList(environment.getProtocol().getNetworkKnowledge().get(Integer.parseInt(parameters[i]))));
+                    for (int j = 0; j < tempList.size(); j++) {
+                        Term term = new Term();
+                        term.overwriteTerm(tempList.get(j));
+                        finalList.add(term);
                     }
+                } else {
+                    Term term = new Term();
+                    term.overwriteTerm(environment.getProtocol().getNetworkKnowledge().get(Integer.parseInt(parameters[i])));
+                    finalList.add(term);
                 }
             }
+            Term listTerm = new Term();
+            listTerm.overwriteTerm(Term.createList(finalList));
+            System.out.println("reee");
+            Term encryptedTerm = new Term();
+            encryptedTerm.overwriteTerm(Term.encrypt(listTerm, key));
+            environment.getProtocol().addNetworkKnowledge(encryptedTerm);
 
         }
+        RequestDispatcher rd = request.getRequestDispatcher("/networkbuffer.jsp");
+        rd.forward(request, response);
 
     }
 
