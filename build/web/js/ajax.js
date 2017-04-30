@@ -29,16 +29,18 @@ function getStep(event, runID, stepDescription, action) {
     $("#currentStepAgent").val(runID);
     $("#currentAction").val(action);
     $("#currentStep").val(stepDescription).text(stepDescription);
-    if (action == 'SEND') {
+    if (action == 'SEND' || action == 'FRESH') {
         //alert(stepDescription);
         //$("#currentStepAgent").val(runID);
         //$("#currentAction").val(action);
         //$("#currentStep").val(stepDescription).text(stepDescription);
+        $("#selectlable").hide();
         $("#selectTerm").hide();
         $("#stepModal").modal();
     } else {
         //$("#currentStep").val(stepDescription).text(stepDescription);
         //$("#currentStepAgent").val(runID);
+        
         $.get("./ajax/getNetworkBuffer",
                 {
                     runID: runID
@@ -47,6 +49,7 @@ function getStep(event, runID, stepDescription, action) {
                     //alert("Data: " + data + "\nStatus: " + status);
                     var $select = $("#selectTerm");
                     $select.show();
+                    $("#selectlable").show();
                     $select.find("option").remove();
                     //$("#upModal").modal();
                     $.each(data, function (index, item) {               // Iterate over the JSON object.

@@ -118,16 +118,16 @@ public class networkbuffer extends HttpServlet {
             encryptedTerm.overwriteTerm(Term.encrypt(listTerm, key));
             environment.getProtocol().addNetworkKnowledge(encryptedTerm);
 
-        }
-        else if(request.getParameter("postCommand").equals("DECRYPT"))
-        {
+        } else if (request.getParameter("postCommand").equals("DECRYPT")) {
             int value = Integer.parseInt(request.getParameter("selectedTerm"));
             int keyValue = Integer.parseInt(request.getParameter("selectedKey"));
             Term term = new Term();
             Term decryptedTerm = Term.decrypt(environment.getProtocol().getNetworkKnowledge().get(value), environment.getProtocol().getNetworkKnowledge().get(keyValue));
-            term.overwriteTerm(decryptedTerm);
-            //if not null
-            environment.getProtocol().addNetworkKnowledge(term);
+            if (!(decryptedTerm == null)) {
+                term.overwriteTerm(decryptedTerm);
+                //if not null
+                environment.getProtocol().addNetworkKnowledge(term);
+            }
         }
         RequestDispatcher rd = request.getRequestDispatcher("/networkbuffer.jsp");
         rd.forward(request, response);
