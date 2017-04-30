@@ -101,21 +101,6 @@ public class Term {
         return keys;
     }
 
-    public static List<Term> registerAsymmetics(Term agent) {
-        List<Term> keys = new ArrayList<>();
-        String publicKeyString = "pk(" + agent.termString + ")";
-        String privateKeyString = "sk(" + agent.termString + ")";
-        Term publicKey = new Term(publicKeyString, Type.PK, 1);
-        Term privateKey = new Term(privateKeyString, Type.SK, 1);
-        publicKey.subTerms.add(agent);
-        privateKey.subTerms.add(agent);
-
-        keys.add(publicKey);
-        keys.add(privateKey);
-
-        return keys;
-    }
-
     public static Term hash(Term hashee) {
         String hashString = "h(" + hashee.termString + ")";
         Term hash = new Term(hashString, Type.HASH, 1);

@@ -48,44 +48,7 @@ public class Environment {
         System.out.println("My name is: " + agents.get(id).getName() + "\nMy Run Identifier is: " + agents.get(id).getRunIdentifier());
         setRole(id, roleAgent);
     }
-
-    /*public void run() {
-     Scanner reader = new Scanner(System.in);  // Reading from System.in
-     while (true) {
-     System.out.println("\n\n\n1:CREATE AGENT\n2:TAKE STEP\nChoose Option: ");
-     int n = reader.nextInt();        
-     if (n == 1) {
-     System.out.println("Enter an Agent name: ");
-     String name = reader.next();
-     int id = createAgent(name);
-     System.out.println("My name is: " + agents.get(id).getName() + "\nMy Run Identifier is: " + agents.get(id).getRunIdentifier());
-     /*System.out.println("Give Role:\n" + protocol.getRole().get(0).getAgent() + "\n" + protocol.getRole().get(1).getAgent() + "\n" + protocol.getRole().get(2).getAgent());
-     String roleAgent = reader.next();
-                
-     agents.get(id).setRole(protocol.getRole().get(roleMap.get(roleAgent)));
-     agents.get(id).setKnowledge(protocol.getRole().get(roleMap.get(roleAgent)).getKnowledge());
-     for(Step step : agents.get(id).getRole().getSteps()) {
-     System.out.println(step.getAction().toString() + " " + step.getTerm().getTermString());
-     }
-     setRole(reader, id);
-     }
-     else if (n==2)
-     {
-     System.out.println("\nCHOOSE AGENT TO STEP:");
-     for(Agent agent : agents)
-     {
-     System.out.println(agent.getRunIdentifier() + ": " + agent.getName());
-     }
-     int agent = reader.nextInt();
-     boolean stepsDone = takeStep(agent, reader);
-     System.out.println("Step Taken: " + stepsDone);
-     }
-     else if(n==3)
-     {
-     correctVariable(reader);
-     }
-     }
-     }*/
+    
     public void setRole(int id, String roleChar) {
         System.out.println("Give Role:\n" + protocol.getRole().get(0).getAgent() + "\n" + protocol.getRole().get(1).getAgent() + "\n" + protocol.getRole().get(2).getAgent());
         String roleAgent = roleChar;
@@ -131,11 +94,6 @@ public class Environment {
 
         //correct with agent
         System.out.println("\nCORRECT WITH AGENT:\nTYPE NAME:");
-        /*for(Agent agent : agents)
-         {
-         System.out.println(agent.getRunIdentifier() + ": " + agent.getName());
-         }*/
-        //int replaceID = reader.nextInt();
         String newTermString = newTString;
         //agents.get(agentID).correctVariable(new Term(agents.get(replaceID).getName(),Type.PUBLIC,0), variables.get(variableID));
         agents.get(agentID).correctVariable(new Term(newTermString, type, 0), variables.get(variableID)); //always base
@@ -153,6 +111,10 @@ public class Environment {
 
     public int createAgent(String name) {
         Agent agent = new Agent(name, Status.PARTICIPANT, agents.size());
+        Term agentTerm = new Term(name, Type.PUBLIC, 0);
+        Term publicKey = new Term();
+        publicKey.overwriteTerm(Term.registerAsymmetic(agentTerm).get(0));
+        this.getProtocol().addNetworkKnowledge(publicKey);
         agents.add(agent);
         agentMap.put(agent.getRunIdentifier(), name);
         //messageMap.add(new LinkedList<>());
@@ -223,8 +185,8 @@ public class Environment {
         return networkBuffer;
     }
     
-//    public List<Term> getNetworkKnowledge() {
-//        return networkKnowledge;
-//    }
+    public void addToNetowrkBuffer(Term term) {
+        networkBuffer.add(term);
+    }
 
 }

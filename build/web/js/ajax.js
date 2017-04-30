@@ -97,6 +97,8 @@ function getEncrypt(event) {
                 //alert("Data: " + data + "\nStatus: " + status);
                 var $select = $("#selectTermsEncrypt");
                 var $keys = $("#selectKey");
+                $("#keylabel").show();
+                $keys.show()
                 $("#postcommand").val('ENCRYPT');
                 $select.prop('multiple', true);
                 $select.find("option").remove();
@@ -128,6 +130,8 @@ function getDecrypt(event) {
                 //alert("Data: " + data + "\nStatus: " + status);
                 var $select = $("#selectTermsEncrypt");
                 var $keys = $("#selectKey");
+                $("#keylabel").show();
+                $keys.show()
                 $("#postcommand").val('DECRYPT');
                 $select.removeProp('multiple')
                 $select.find("option").remove();
@@ -138,6 +142,36 @@ function getDecrypt(event) {
                     if(item.type == 'PK' || item.type == 'SK') {
                         $("<option>").val(index).text(item.termString).appendTo($keys)
                     }
+                    //alert(item.termString);
+                });
+                $("#upModal").modal();
+
+            });
+    
+}
+
+function sendBuffer(event) {
+    //$("#currentAgent").val(runID)
+    //alert('encrypt');
+    //$("#upModal").modal();
+    //$('#someid').prop('disabled', true);
+    $.get("./ajax/getNetworkKnowledge",
+            {
+                runID: 1
+            },
+            function (data, status) {
+                //alert("Data: " + data + "\nStatus: " + status);
+                var $select = $("#selectTermsEncrypt");
+                var $keys = $("#selectKey");
+                $("#keylabel").hide();
+                $keys.hide();
+                $("#postcommand").val('SENDBUFFER');
+                $select.removeProp('multiple')
+                $select.find("option").remove();
+                //$keys.find("option").remove();
+                //$("#upModal").modal();
+                $.each(data, function (index, item) {               // Iterate over the JSON object.
+                    $("<option>").val(index).text(item.termString).appendTo($select); // Create HTML <option> element, set its value with currently iterated key and its text content with currently iterated item and finally append it to the <select>.
                     //alert(item.termString);
                 });
                 $("#upModal").modal();

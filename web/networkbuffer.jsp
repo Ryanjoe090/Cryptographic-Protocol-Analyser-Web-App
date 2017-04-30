@@ -75,7 +75,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <legend> 
-                                <i class="fa fa-check-square"></i>&nbsp;&nbsp;&nbsp;Encrypt
+                                <i class="fa fa-check-square"></i>&nbsp;&nbsp;&nbsp;Adversary Action
                             </legend>
                         </div>
                         <div id="entry_fieldsg" class="modal-body">	
@@ -87,7 +87,7 @@
                                     </select>
                                 </div>
                                 <br>
-                                <label class="control-label">Select Key:</label>
+                                <label id="keylabel" class="control-label">Select Key:</label>
                                 <br>
                                 <div style="position:relative;">
                                     <select id="selectKey" name="selectedKey" class="form-control">
@@ -164,6 +164,7 @@
                                         <button type="button" class="btn btn-danger btn-block" onclick="getDecrypt(event)">Decrypt</button>
                                         <button type="button" class="btn btn-success btn-block">Create Fresh</button>
                                         <button type="button" class="btn btn-warning btn-block">Hash Term</button>
+                                        <button type="button" class="btn btn-primary btn-block" onclick="sendBuffer(event)">Send to Network Buffer</button>
                                     </div>
                                 </div>
                             </div>
